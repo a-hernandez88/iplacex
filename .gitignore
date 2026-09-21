@@ -1,0 +1,10 @@
+target/
+.idea/
+.vscode/
+*.log
+deployment/runtime/
+.tools/
+.m2/
+apache-maven.zip
+verify.log
+deploy.log
