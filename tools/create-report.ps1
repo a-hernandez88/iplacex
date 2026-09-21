@@ -40,6 +40,7 @@ $rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships x
 [System.IO.File]::WriteAllText((Join-Path $temp '_rels/.rels'), $rels, [System.Text.UTF8Encoding]::new($false))
 [System.IO.File]::WriteAllText((Join-Path $temp 'word/document.xml'), $xml, [System.Text.UTF8Encoding]::new($false))
 Add-Type -AssemblyName System.IO.Compression.FileSystem
+Add-Type -AssemblyName System.IO.Compression
 if (Test-Path -LiteralPath $out) { Remove-Item -LiteralPath $out -Force }
 $archive = [System.IO.Compression.ZipFile]::Open($out, [System.IO.Compression.ZipArchiveMode]::Create)
 try {
