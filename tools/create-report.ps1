@@ -41,6 +41,11 @@ $rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships x
 [System.IO.File]::WriteAllText((Join-Path $temp 'word/document.xml'), $xml, [System.Text.UTF8Encoding]::new($false))
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 if (Test-Path -LiteralPath $out) { Remove-Item -LiteralPath $out -Force }
-[System.IO.Compression.ZipFile]::CreateFromDirectory($temp, $out)
+$archive = [System.IO.Compression.ZipFile]::Open($out, [System.IO.Compression.ZipArchiveMode]::Create)
+try {
+    [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, (Join-Path $temp '[Content_Types].xml'), '[Content_Types].xml') | Out-Null
+    [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, (Join-Path $temp '_rels/.rels'), '_rels/.rels') | Out-Null
+    [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, (Join-Path $temp 'word/document.xml'), 'word/document.xml') | Out-Null
+} finally { $archive.Dispose() }
 Remove-Item -LiteralPath $temp -Recurse -Force
 Write-Output $out
