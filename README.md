@@ -13,15 +13,7 @@ La estrategia de ramas es **Trunk-Based**: `main` es la rama estable; las ramas 
 
 `pom.xml` define Java 17, JUnit 5, Surefire para pruebas unitarias y Failsafe para pruebas de integración. El código principal está en `src/main/java`; las pruebas, en `src/test/java`. `.gitignore` excluye compilados, logs y archivos de ejecución.
 
-Para publicar este repositorio local en GitHub, crear un repositorio vacío y ejecutar desde esta carpeta:
-
-```bash
-git remote add origin https://github.com/USUARIO/calculadora-cicd.git
-git push -u origin main
-git push -u origin feature/primer-test
-```
-
-Reemplazar `USUARIO` por la cuenta correspondiente. El enlace y las capturas de GitHub solo se pueden incorporar después de publicar el repositorio.
+Repositorio publicado: <https://github.com/a-hernandez88/iplacex>. Las ramas `main` y `feature/primer-test` muestran el flujo Trunk-Based y su historial de integración. El historial local también se resume en `evidence/git-history.txt`.
 
 ## Actividad 2: CI
 
@@ -32,7 +24,7 @@ mvn -B test       # pruebas unitarias
 mvn -B verify     # build, pruebas unitarias y de integración
 ```
 
-En GitHub: pestaña **Actions** → workflow **Examen final CI CD** → **Run workflow**. Revisar los cuatro jobs y descargar los artefactos `unit-results`, `integration-results`, `application-jar` y `deployment-logs`.
+La [ejecución exitosa de `main`](https://github.com/a-hernandez88/iplacex/actions/runs/35622120211) confirma los cuatro jobs: build, unit-tests, integration-tests y acceptance-deploy-rollback. La [ejecución exitosa de `feature/primer-test`](https://github.com/a-hernandez88/iplacex/actions/runs/35622134914) confirma el control previo a integración. Los artefactos `unit-results`, `integration-results`, `application-jar` y `deployment-logs` se descargan desde la página del run.
 
 ## Actividad 3: aceptación, despliegue y rollback
 
@@ -47,7 +39,7 @@ La demostración usa procesos locales del runner: valida el mecanismo Blue/Green
 
 ## Evidencia verificable
 
-`evidence/verify-local.log` registra el build y los resultados de JUnit. `evidence/deploy-local.log` registra las pruebas de aceptación, el despliegue green y el rollback blue. Son ejecuciones locales reales; las capturas de GitHub Actions requieren publicar el repositorio y correr el workflow en la cuenta del estudiante.
+`evidence/verify-local.log` registra el build y los resultados de JUnit. `evidence/deploy-local.log` registra las pruebas de aceptación, el despliegue green y el rollback blue. `evidence/github-actions.txt` registra los enlaces y resultados de cada job del run público. Son ejecuciones reales, locales y en GitHub Actions.
 
 ## Relación con la pauta
 
