@@ -2,6 +2,7 @@ target/
 .idea/
 .vscode/
 *.log
+!evidence/*.log
 deployment/runtime/
 .tools/
 .m2/
